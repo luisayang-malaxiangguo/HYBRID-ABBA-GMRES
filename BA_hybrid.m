@@ -1,7 +1,6 @@
 function [delta, zeta, gamma, Hbar, Qk, Qk1, x_iterate, error_norm, residual_norm] = ...
-          BA_hybrid(A, B, b, k, lambda, x_true)
-%BA_HYBRID  Hybrid BA–GMRES projected quantities (general B).
-%
+          BA_hybrid(A, B, b, k, lambda, x_true) 
+
 %  M = B*A, d = B*b.
 %  Run k steps of Arnoldi on M with start d, giving
 %     M Q_k = Q_{k+1} Hbar_k,
@@ -101,14 +100,14 @@ function [delta, zeta, gamma, Hbar, Qk, Qk1, x_iterate, error_norm, residual_nor
     % gamma_j(lambda) = beta1 * zeta_j * delta_j / (delta_j^2 + lambda)
     gamma = beta1 * zeta .* (delta ./ (delta.^2 + lambda));   % k x 1
 
-    % ---- Hybrid BA–GMRES iterate x_k^{h,BA}(lambda) ----
+    %  Hybrid BA–GMRES iterate x_k^{h,BA}(lambda) 
     % Reduced coefficients y_k = S_k * gamma
     y_iter = Sk * gamma;         % k x 1
     x_iterate = Qk * y_iter;     % n x 1
 
-    % ---- Norms ----
+   
     % Data-space residual ||b - A x_k||
-    residual_norm = norm(B*b - B*A * x_iterate)/ norm(B*b);
+    residual_norm = norm(b - A * x_iterate)/ norm(b);
 
     % Error norm if x_true provided
     if ~isempty(x_true)
