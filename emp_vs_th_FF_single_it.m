@@ -40,7 +40,7 @@ phi_empirical_ab = (VA' * xk_ab).* sigma ./ coeff_b;
 
 %% Hybrid  
 
-phi_theoretical_hba = BA_hybrid_theory_filters(A, B, b, k, lambda);
+phi_theoretical_hba = BA_hybrid_genB_filter_sorted(A, B, b, k, lambda);
  r_emp_hba = length(phi_empirical_hba);
 r_th_hba  = length(phi_theoretical_hba);
 r_hba     = min(r_emp_hba, r_th_hba);
@@ -49,7 +49,7 @@ phi_th_hba  = phi_theoretical_hba(1:r_hba);
 idx_hba = 1:r_hba;
 
 
-phi_theoretical_hab = AB_hybrid_theory_filters(A, B, b, k, lambda);
+phi_theoretical_hab = AB_hybrid_genB_filter_sorted(A, B, b, k, lambda);
 r_emp_hab = length(phi_empirical_hab);
 r_th_hab  = length(phi_theoretical_hab);
 r_hab     = min(r_emp_hab, r_th_hab);
